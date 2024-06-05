@@ -31,15 +31,15 @@ public class stepDefinitions {
     ResponseSpecification responseSpec;
     Utils utils = new Utils();
 
-    @Given("add place request is created")
-    public void add_place_request_is_created() throws IOException {
+    @Given("add place request is created with name {string} address {string} language {string}")
+    public void add_place_request_is_created(String name, String address, String language) throws IOException {
         TestDataBuild testData = new TestDataBuild();
 
         responseSpec = new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .expectContentType(ContentType.JSON).build();
 
-        addPlaceResponse = given().spec(utils.requestSpecification()).body(testData.generateAddPlacePayload());
+        addPlaceResponse = given().spec(utils.requestSpecification()).body(testData.generateAddPlacePayload(name, address, language));
     }
 
     @When("user calls {string} with POST HTTP request")

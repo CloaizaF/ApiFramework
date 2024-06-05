@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TestDataBuild {
 
-    public PlaceDetails generateAddPlacePayload() {
+    public PlaceDetails generateAddPlacePayload(String name, String address, String language) {
         LocationDetails locationDetails = new LocationDetails();
         locationDetails.setLat(-38.383494);
         locationDetails.setLng(33.427362);
@@ -20,12 +20,12 @@ public class TestDataBuild {
         PlaceDetails placeDetails = new PlaceDetails();
         placeDetails.setLocation(locationDetails);
         placeDetails.setAccuracy(50);
-        placeDetails.setName("Rahul Shetty Academy");
+        placeDetails.setName(name);
         placeDetails.setPhone_number("(+91) 983 893 3937");
-        placeDetails.setAddress("29, side layout, cohen 09");
+        placeDetails.setAddress(address);
         placeDetails.setTypes(types);
         placeDetails.setWebsite("http://rahulshettyacademy.com");
-        placeDetails.setLanguage("French-IN");
+        placeDetails.setLanguage(language);
 
         return placeDetails;
     }

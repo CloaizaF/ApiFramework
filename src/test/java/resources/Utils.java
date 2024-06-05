@@ -12,14 +12,19 @@ import java.util.Properties;
 
 public class Utils {
 
+    public static RequestSpecification reqSpec;
+
     public RequestSpecification requestSpecification() throws IOException {
-        PrintStream log = new PrintStream(new FileOutputStream("C:\\Users\\loaiz\\IdeaProjects\\ApiFramework\\files\\logging.txt"));
-        return new RequestSpecBuilder()
-                .setBaseUri(getGlobalValue("baseUrl"))
-                .addQueryParam("key", "qaclick123")
-                .addFilter(RequestLoggingFilter.logRequestTo(log))
-                .addFilter(ResponseLoggingFilter.logResponseTo(log))
-                .setContentType(ContentType.JSON).build();
+        if (reqSpec == null) {
+            PrintStream log = new PrintStream(new FileOutputStream("C:\\Users\\loaiz\\IdeaProjects\\ApiFramework\\files\\logging.txt"));
+            reqSpec = new RequestSpecBuilder()
+                    .setBaseUri(getGlobalValue("baseUrl"))
+                    .addQueryParam("key", "qaclick123")
+                    .addFilter(RequestLoggingFilter.logRequestTo(log))
+                    .addFilter(ResponseLoggingFilter.logResponseTo(log))
+                    .setContentType(ContentType.JSON).build();
+        }
+        return reqSpec;
     }
 
     public String getGlobalValue(String key) throws IOException {
