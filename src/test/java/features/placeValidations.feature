@@ -14,3 +14,8 @@ Feature: Validating Place API's
       | name    | address         | language |
       | AAHouse | Martha Avenue   | English  |
       | BBHouse | Lawrence Street | French   |
+
+  Scenario: Verify place is deleted by using DeletePlaceAPI
+    Given delete place request is created with place_id
+    When user calls "DeletePlaceAPI" with "POST" HTTP request
+    Then the API Call is successfully done with status code 200

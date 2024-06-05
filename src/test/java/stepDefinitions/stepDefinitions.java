@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -23,22 +22,21 @@ public class stepDefinitions {
     RequestSpecification requestSpec;
     Response response;
     ResponseSpecification responseSpec;
+    TestDataBuild testData = new TestDataBuild();
     Utils utils = new Utils();
-    String placeId;
+    static String placeId;
 
     @Given("add place request is created with name {string} address {string} language {string}")
     public void add_place_request_is_created(String name, String address, String language) throws IOException {
-        TestDataBuild testData = new TestDataBuild();
-
-        responseSpec = new ResponseSpecBuilder()
-                .expectStatusCode(200)
-                .expectContentType(ContentType.JSON).build();
-
         requestSpec = given().spec(utils.requestSpecification()).body(testData.generateAddPlacePayload(name, address, language));
     }
 
     @When("user calls {string} with {string} HTTP request")
     public void user_calls_api_with_http_request(String resource, String httpMethod) {
+        responseSpec = new ResponseSpecBuilder()
+                .expectStatusCode(200)
+                .expectContentType(ContentType.JSON).build();
+
         APIResources resourceAPI = APIResources.valueOf(resource);
 
         if (httpMethod.equalsIgnoreCase("POST")) {
@@ -70,4 +68,9 @@ public class stepDefinitions {
         requestSpec = given().spec(utils.requestSpecification()).queryParam("place_id", placeId);
     }
 
+    @When("delete place request is created with place_id")
+    public void delete_place_request_is_created_with_place_id() throws IOException {
+        requestSpec = given().spec(utils.requestSpecification())
+                .body(testData.generateDeletePlacePayload(placeId));
+    }
 }
