@@ -17,7 +17,7 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
-public class stepDefinitions {
+public class ApiStepDefinitions {
 
     RequestSpecification requestSpec;
     Response response;

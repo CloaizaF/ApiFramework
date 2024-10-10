@@ -1,5 +1,6 @@
 Feature: Validating Place API's
 
+  @AddPlace
   Scenario Outline: Verify place is successfully added using AddPlaceAPI
     Given add place request is created with name "<name>" address "<address>" language "<language>"
     When user calls "AddPlaceAPI" with "POST" HTTP request
@@ -15,6 +16,7 @@ Feature: Validating Place API's
       | AAHouse | Martha Avenue   | English  |
       | BBHouse | Lawrence Street | French   |
 
+  @DeletePlace
   Scenario: Verify place is deleted by using DeletePlaceAPI
     Given delete place request is created with place_id
     When user calls "DeletePlaceAPI" with "POST" HTTP request

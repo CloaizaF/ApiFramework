@@ -1,6 +1,5 @@
 package resources;
 
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -9,7 +8,10 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Properties;
 
 public class Utils {
@@ -18,7 +20,7 @@ public class Utils {
 
     public RequestSpecification requestSpecification() throws IOException {
         if (reqSpec == null) {
-            PrintStream log = new PrintStream(new FileOutputStream("C:\\Users\\loaiz\\IdeaProjects\\ApiFramework\\files\\logging.txt"));
+            PrintStream log = new PrintStream(new FileOutputStream("C:\\Users\\loaiz\\OneDrive\\Documentos\\Automation\\ApiFramework\\files\\logging.txt"));
             reqSpec = new RequestSpecBuilder()
                     .setBaseUri(getGlobalValue("baseUrl"))
                     .addQueryParam("key", "qaclick123")
@@ -31,7 +33,7 @@ public class Utils {
 
     public String getGlobalValue(String key) throws IOException {
         Properties properties = new Properties();
-        FileInputStream file = new FileInputStream("C:\\Users\\loaiz\\IdeaProjects\\ApiFramework\\src\\test\\java\\resources\\global.properties");
+        FileInputStream file = new FileInputStream("C:\\Users\\loaiz\\OneDrive\\Documentos\\Automation\\ApiFramework\\src\\test\\java\\resources\\global.properties");
         properties.load(file);
         return properties.getProperty(key);
     }
